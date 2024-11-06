@@ -81,7 +81,7 @@ export default function Component() {
           {activeSection === 'about' && (
             <div className="space-y-4">
               <p>
-                Coming from a Product Owner background where I bridged business and development teams, I discovered my true passion lies in the technical side of software delivery. My transition journey began with diving deep into DevOps practices and infrastructure automation. Through hands-on projects and continuous learning, I've been building expertise in{' '}
+                Coming from a Product Owner background where I bridged business and development teams, I discovered my true passion lies in the technical side of software delivery. My transition journey began with diving deep into DevOps practices and infrastructure automation. Through hands-on projects and continuous learning, I have been building expertise in{' '}
                 <Link href="#" className="text-[#64ffda] hover:underline">
                   containerization
                 </Link>
