@@ -4,6 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, Codepen, AtSign } from 'lucide-react'
 import ThemeSwitcher from './components/ThemeSwitcher'
+//import GithubSection from './components/github/GithubSection';
+import ProjectsSection from './components/projectsection';
+
+
 
 export default function Component() {
   const [activeSection, setActiveSection] = useState('about')
@@ -130,6 +134,7 @@ export default function Component() {
         </main>
       </div>
       <ThemeSwitcher />
+      <ProjectsSection />
     </div>
   )
 }
