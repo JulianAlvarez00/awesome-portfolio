@@ -1,4 +1,3 @@
-// app/components/github/GithubSection.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -29,7 +28,7 @@ export default function GithubSection() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#64ffda]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#64ffda]" />
       </div>
     );
   }
@@ -38,15 +37,19 @@ export default function GithubSection() {
     return <div className="text-red-400 py-4">Error: {error}</div>;
   }
 
-  if (!githubData) return null;
+  if (!githubData?.repositories) {
+    return null;
+  }
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center gap-4 text-gray-300">
-        <span className="px-4 py-2 bg-[#1a1f2e] rounded-md">
-          Total Contributions: {githubData.contributionsCollection.contributionCalendar.totalContributions}
-        </span>
-      </div>
+      {githubData.contributionsCollection?.contributionCalendar?.totalContributions && (
+        <div className="flex items-center gap-4 text-gray-300">
+          <span className="px-4 py-2 bg-[#1a1f2e] rounded-md">
+            Total Contributions: {githubData.contributionsCollection.contributionCalendar.totalContributions}
+          </span>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {githubData.repositories.map((repo) => (
@@ -72,15 +75,17 @@ export default function GithubSection() {
             <div className="flex items-center gap-4 text-sm text-gray-400">
               {repo.language && (
                 <span className="flex items-center">
-                  <span className="w-2 h-2 rounded-full bg-[#64ffda] mr-2"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#64ffda] mr-2" />
                   {repo.language}
                 </span>
               )}
               <span className="flex items-center gap-1">
-                <span>⭐</span> {repo.stargazers_count}
+                <span>⭐</span>
+                {repo.stargazers_count}
               </span>
               <span className="flex items-center gap-1">
-                <span>🍴</span> {repo.forks_count}
+                <span>🍴</span>
+                {repo.forks_count}
               </span>
             </div>
           </div>

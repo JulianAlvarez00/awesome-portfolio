@@ -69,22 +69,26 @@ export async function getGithubUserData(): Promise<GithubProfileData> {
       throw new Error(`GitHub API responded with status: ${response.status}`);
     }
 
-    const data = (await response.json()) as GitHubApiResponse;
+    const data = await response.json() as GitHubApiResponse;
 
     if (data.errors) {
       throw new Error(data.errors[0].message);
     }
 
+    if (!data.data?.user) {
+      throw new Error('Invalid response structure from GitHub API');
+    }
+
     // Transform the data to match our expected format
     const transformedData: GithubProfileData = {
       repositories: data.data.user.repositories.nodes.map((repo) => ({
-        id: parseInt(repo.id),
+        id: repo.id,
         name: repo.name,
-        description: repo.description,
+        description: repo.description ?? null,
         html_url: repo.url,
         stargazers_count: repo.stargazerCount,
         forks_count: repo.forkCount,
-        language: repo.primaryLanguage?.name || null,
+        language: repo.primaryLanguage?.name ?? null,
         topics: repo.repositoryTopics.nodes.map((topic) => topic.topic.name)
       })),
       contributionsCollection: {
@@ -97,7 +101,6 @@ export async function getGithubUserData(): Promise<GithubProfileData> {
 
     return transformedData;
   } catch (error) {
-    console.error('Error fetching GitHub data:', error);
-    throw error;
+    throw new Error(`Failed to fetch GitHub data: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }

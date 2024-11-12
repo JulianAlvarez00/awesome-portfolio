@@ -25,7 +25,7 @@ export default function ProjectsGithubSection() {
                 GitHub Projects
               </h3>
               <a 
-                href="https://github.com/JulianAlvarez"
+                href="https://github.com/JulianAlvarez00"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#64ffda] hover:text-[#64ffda]/80 transition-colors"
