@@ -1,5 +1,4 @@
-// src/utils/github.ts
-import { GithubProfileData } from '@/types/github';
+import { GithubProfileData, GitHubApiResponse } from '@/types/github';
 
 const GITHUB_API_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
@@ -70,7 +69,7 @@ export async function getGithubUserData(): Promise<GithubProfileData> {
       throw new Error(`GitHub API responded with status: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as GitHubApiResponse;
 
     if (data.errors) {
       throw new Error(data.errors[0].message);
@@ -78,15 +77,15 @@ export async function getGithubUserData(): Promise<GithubProfileData> {
 
     // Transform the data to match our expected format
     const transformedData: GithubProfileData = {
-      repositories: data.data.user.repositories.nodes.map((repo: any) => ({
-        id: repo.id,
+      repositories: data.data.user.repositories.nodes.map((repo) => ({
+        id: parseInt(repo.id),
         name: repo.name,
         description: repo.description,
         html_url: repo.url,
         stargazers_count: repo.stargazerCount,
         forks_count: repo.forkCount,
         language: repo.primaryLanguage?.name || null,
-        topics: repo.repositoryTopics.nodes.map((topic: any) => topic.topic.name)
+        topics: repo.repositoryTopics.nodes.map((topic) => topic.topic.name)
       })),
       contributionsCollection: {
         contributionCalendar: {

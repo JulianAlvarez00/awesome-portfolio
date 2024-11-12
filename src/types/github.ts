@@ -1,4 +1,47 @@
 // src/types/github.ts
+export interface GitHubApiResponse {
+  data: {
+    user: {
+      repositories: {
+        nodes: Array<{
+          id: string;
+          name: string;
+          description: string | null;
+          url: string;
+          stargazerCount: number;
+          forkCount: number;
+          primaryLanguage: {
+            name: string;
+          } | null;
+          repositoryTopics: {
+            nodes: Array<{
+              topic: {
+                name: string;
+              };
+            }>;
+          };
+          createdAt: string;
+          updatedAt: string;
+        }>;
+      };
+      
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: number;
+          weeks: Array<{
+            contributionDays: Array<{
+              contributionCount: number;
+              date: string;
+            }>;
+          }>;
+        };
+      };
+    };
+  };
+  errors?: Array<{
+    message: string;
+  }>;
+}
 
 export interface Repository {
   id: number;
