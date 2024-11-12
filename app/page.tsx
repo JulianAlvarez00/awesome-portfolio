@@ -4,6 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, Codepen, AtSign } from 'lucide-react'
 import ThemeSwitcher from './components/ThemeSwitcher'
+import GithubSection from './components/github/GithubSection';
+import ProjectsSection from './components/projectsection';
+
+
 
 export default function Component() {
   const [activeSection, setActiveSection] = useState('about')
@@ -57,18 +61,32 @@ export default function Component() {
           </nav>
 
           <div className="flex gap-4 pt-8">
-            {['Github', 'Linkedin', 'Codepen', 'Instagram', 'Twitter', 'AtSign'].map((icon) => (
-              <Link 
-                key={icon} 
-                href="#" 
-                className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors"
-              >
-                {/* Los componentes de iconos se mantienen igual */}
-                <span className="sr-only">{icon}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <Github size={20} />
+    <span className="sr-only">Github</span>
+  </Link>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <Linkedin size={20} />
+    <span className="sr-only">LinkedIn</span>
+  </Link>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <Codepen size={20} />
+    <span className="sr-only">Codepen</span>
+  </Link>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <Instagram size={20} />
+    <span className="sr-only">Instagram</span>
+  </Link>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <Twitter size={20} />
+    <span className="sr-only">Twitter</span>
+  </Link>
+  <Link href="#" className="text-[#8892b0] dark:text-gray-400 hover:text-[#64ffda] dark:hover:text-emerald-400 transition-colors">
+    <AtSign size={20} />
+    <span className="sr-only">Email</span>
+  </Link>
+</div>
+</div>  {/* Closing tag for the space-y-8 div */}
 
         <main className="space-y-24">
           {activeSection === 'about' && (
@@ -113,7 +131,7 @@ export default function Component() {
               </div>
             </div>
           )}
-
+          
           {activeSection === 'projects' && (
             <div className="grid gap-8">
               <div className="p-6 rounded-lg bg-[#112240] dark:bg-gray-800 space-y-4">
@@ -130,6 +148,8 @@ export default function Component() {
         </main>
       </div>
       <ThemeSwitcher />
+      <ProjectsSection /> 
     </div>
+    
   )
 }
